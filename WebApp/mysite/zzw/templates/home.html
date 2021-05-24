@@ -1,0 +1,25 @@
+{% extends 'base.html'%}
+
+{% block content%}
+<!--    <h1>Hello Word</h1>-->
+    <!--使用从接口请求回来的数据进行展示-->
+    <div class="container">
+        <div class="col">
+            {% for x in api %}
+            <div class="col-sm">
+                <div class="card" style="width: 18rem;">
+                  <img class="card-img-top" src="{{x.avatar_url}}" alt="Card image cap">
+                  <div claass="card-body">
+                    <h5 class="card-title">{{x.login}}</h5>
+                    <p class="card-text">{{x.login}}的github</p>
+                    <a href="{{x.html_url}}" class="btn btn-primary">访问</a>
+                  </div>
+                </div>
+                <br>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+<!--    <p>{{api}}</p>-->
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html'%}
+
+{% block content%}
+<!--    <h1>Hello {{user}}</h1>-->
+    {% if not_found %}
+        <h2>{{not_found}}</h2>
+    {% else %}
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="{{user_info.avatar_url}}" alt="Card image cap">
+          <div claass="card-body">
+            <h5 class="card-title">{{user_info.login}}</h5>
+            <p class="card-text">{{user_info.login}}的github</p>
+            <a href="{{user_info.html_url}}" class="btn btn-primary">访问</a>
+          </div>
+        </div>
+    {% endif %}
+{% endblock %}
