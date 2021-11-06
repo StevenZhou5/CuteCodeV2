@@ -1,7 +1,9 @@
 package main
 
 import (
+	"crypto/md5"
 	"fmt"
+	"strconv"
 	"test"
 	"time"
 )
@@ -57,9 +59,27 @@ func main() {
 	//INT((expose_t%(86400*7))/86400) AS expose_week
 	fmt.Printf("exposeWeek2 : %+v\n", ((ts % (86400 * 7)) / 86400))
 
+	var a = float64(0)
+	fmt.Printf("判断float64是否为零%v\n", a == 0)
+
+	// float 的加减法并不能得到准确值
+	a = float64(1.5)
+	b := float64(1.3)
+	fmt.Printf("1.5 -1.2 = %+v \n", a-b)
+
 	//exposeHour := parseExposeHour()
 	//// INT((ups.expose_t%86400)/900) AS expose_quarter
 	//exposeQuarter := ts % 86400 / 900
 	//// INT((ups.expose_t%86400)/60) AS expose_minute
 	//exposeMinute := ts % 86400 / 60
+
+	res := Md5SuffixForRealtimeV2("pp_ynn_ugc_deep_match", 4)
+	fmt.Printf("Md5的结果为:%v\n", res)
+}
+
+// 取MD5的32位16进制的后N位，转为10进制
+func Md5SuffixForRealtimeV2(data string, length int) int64 {
+	s := fmt.Sprintf("%x", md5.Sum([]byte(data)))
+	i, _ := strconv.ParseInt(s[32-length:], 16, 64)
+	return i % 10000
 }
