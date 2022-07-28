@@ -1,9 +1,8 @@
 import pytest
-import tensorflow as tf
 
-from deepctr.models import DCN,DeepFM,NFM
+from deepctr.models import DCN
 
-from ..utils import get_test_data, SAMPLE_SIZE, check_model
+from 推荐算法.DeepCtr.test.models.utils import get_test_data, SAMPLE_SIZE, check_model
 
 
 @pytest.mark.parametrize(

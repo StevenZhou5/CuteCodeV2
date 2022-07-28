@@ -12,13 +12,14 @@ type Person struct {
 
 type Student struct {
 	Person
-	Id          int64 `json:"-"`       // 这样表示在json中不会输出
-	IsGraduates bool  `json:",string"` // 这样代表在json中将此字段转换为string类型
-	Score       int64 `json:"score"`
+	Id          int64   `json:"-"`       // 这样表示在json中不会输出
+	IsGraduates bool    `json:",string"` // 这样代表在json中将此字段转换为string类型
+	Score       int64   `json:"score"`
+	TagIds      []int64 `protobuf:"varint,62,rep,name=TagIds,json=tagIds" json:"tag_ids,omitempty" bson:"tag_ids,omitempty"`
 }
 
 func Test01() {
-	s := Student{Person{"周振武", 18}, 001, true, 100}
+	s := Student{Person{"周振武", 18}, 001, true, 100, nil}
 
 	//buf, err := json.Marshal(s)
 	buf, err := json.MarshalIndent(&s, "", "	") // 采用格式化编码
@@ -43,6 +44,7 @@ func Test02() {
 		fmt.Println("err :", err)
 		return
 	}
+	println(s.TagIds, len(s.TagIds))
 	fmt.Printf("s = %+v\n", s)
 }
 
@@ -130,8 +132,8 @@ type PPCtrDcnSlotSt struct {
 func Test03() {
 	jsonBuf := `{"mid":20000004,"pid":20000004,"expose_minute": 10000,"rank": 1000,"gender": 10,"ptype": 1000,"tid": 1000004,"is_student": 10,"nt": 100,"filter": 1000,"channel": 50,"vdur": 1000,"source": 1000,"direction": 10,"profession": 10,"student": 10,"age": 100,"zy_age": 1000,"reg_age": 1000,"isreg": 3,"history_len": 10000,"partid": 100000,"post_age": 1000,"expose_week": 10,"expose_hour": 30,"expose_quarter": 1500,"weekday": 10}`
 	var s PPCtrDcnSlotSt
-	fmt.Printf("jsonBuf:%v\n",jsonBuf)
-	fmt.Printf("PPCtrDcnSlotSt:%v\n",&s)
+	fmt.Printf("jsonBuf:%v\n", jsonBuf)
+	fmt.Printf("PPCtrDcnSlotSt:%v\n", &s)
 	err := json.Unmarshal([]byte(jsonBuf), &s) // 这里要传入指针类型
 	if err != nil {
 		fmt.Println("err :", err)

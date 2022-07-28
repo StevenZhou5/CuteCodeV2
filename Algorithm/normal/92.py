@@ -29,23 +29,26 @@ class ListNode():
 
 
 class Solution():
-
-    def reverse_with_idx(self, head, left, right):
+    def reverse_with_idx_v2(self, head, left, right):
         if not head or left == right:
-            return
+            return head
 
-        pre = head
+        # 第一步：先找到 left_node 和 left的前一个node
+        left_node_pre = head
+        left_node = left_node_pre.next
         for _ in range(1, left):
-            pre = pre.next
-        left_node = pre
-        right_node = pre.next
-        print(left_node.val, right_node.val)
+            left_node_pre, left_node = left_node, left_node.next
 
+        # 第二步：反转中间的所有结点，并找到right 和 right 的next结点
+        pre = left_node
         cur = pre.next
-        for _ in range(right - left + 1):
+        for _ in range(right - left):
             cur.next, pre, cur = pre, cur, cur.next
-        print("pre:", pre.val, "; cur:", cur.val)
-        left_node.next, right_node.next = pre, cur
+        right_node = pre
+        right_node_next = cur
+
+        # 第三步: left_pre.next 等于right; left.next等于 right_next
+        left_node_pre.next, left_node.next = right_node, right_node_next
 
         return head
 
@@ -59,9 +62,10 @@ for i in range(1, 10):
     cur = cur.next
     init.append(cur.val)
 print("init list:", init)
-
+left, right = 1, 8
+print("left:%d; right:%d;" % (left, right))
 solu = Solution()
-res_node = solu.reverse_with_idx(head, 2, 5)
+res_node = solu.reverse_with_idx_v2(head, left, right)
 cur = res_node
 res = []
 while cur:

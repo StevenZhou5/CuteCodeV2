@@ -46,15 +46,15 @@ class Solution():
 
             return 0 <= int(cur_ips) <= 255
 
-        def get_all(s, used_point, tar_str):
+        def get_all(left_s, used_point, tar_str):
             if used_point == 3:
-                if is_valid(s):
-                    res.append(tar_str[1:] + "." + s)
+                if is_valid(left_s):
+                    res.append(tar_str[1:] + "." + left_s)
                 return
-            for i in range(min(3, len(s))):
-                cur_s = s[:i + 1]
+            for i in range(min(3, len(left_s))):
+                cur_s = left_s[:i + 1]
                 if is_valid(cur_s):  # is_valid
-                    get_all(s[i + 1:], used_point + 1, tar_str + '.' + cur_s)
+                    get_all(left_s[i + 1:], used_point + 1, tar_str + '.' + cur_s)
 
         get_all(s, 0, "")
         return res

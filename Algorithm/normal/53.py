@@ -39,7 +39,7 @@ class Solution:
             return None
 
         res = nums[0]
-        cur = nums[0]
+        cur = nums[0]  # 选中当前位置的值可以得到的最大加和
         for i in range(1, len(nums)):
             cur = max(nums[i], cur + nums[i])
             res = max(cur, res)

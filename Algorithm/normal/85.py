@@ -45,8 +45,10 @@ class Solution():
             return 0
         # 状态，存储[lenth] 以当前点为最右边的点，在当前行的最长连续长度
         res = 0
-        for row in range(len(matrix)):
-            for col in range(len(matrix[0])):
+        matrix_height = len(matrix)
+        matrix_width = len(matrix[0])
+        for row in range(matrix_height):
+            for col in range(matrix_width):
                 if matrix[row][col] == "0":
                     matrix[row][col] = 0
                     continue

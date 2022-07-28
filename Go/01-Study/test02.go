@@ -13,6 +13,9 @@ func newTask(i int) {
 }
 
 func main() {
+	for _, val := range []int{0, 1} {
+		fmt.Println(val)
+	}
 	for i := 0; i < 10; i++ {
 		go newTask(i) // 使用go关键字即可创建协程
 	}

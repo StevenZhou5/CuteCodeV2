@@ -1,7 +1,7 @@
 import numpy as np
 import tensorflow as tf
 
-from deepctr.feature_column import SparseFeat, VarLenSparseFeat, DenseFeat,get_feature_names
+from deepctr.feature_column import SparseFeat, VarLenSparseFeat, DenseFeat, get_feature_names
 from deepctr.models import DIEN
 
 
@@ -38,8 +38,9 @@ def get_xy_fd(use_neg=False, hash_flag=False):
         feature_dict['neg_hist_item_id'] = np.array([[1, 2, 3, 0], [1, 2, 3, 0], [1, 2, 0, 0]])
         feature_dict['neg_hist_cate_id'] = np.array([[1, 2, 2, 0], [1, 2, 2, 0], [1, 2, 0, 0]])
         feature_columns += [
-            VarLenSparseFeat(SparseFeat('neg_hist_item_id', vocabulary_size=3 + 1, embedding_dim=8, embedding_name='item_id'),
-                             maxlen=4, length_name="seq_length"),
+            VarLenSparseFeat(
+                SparseFeat('neg_hist_item_id', vocabulary_size=3 + 1, embedding_dim=8, embedding_name='item_id'),
+                maxlen=4, length_name="seq_length"),
             VarLenSparseFeat(SparseFeat('neg_hist_cate_id', 2 + 1, embedding_dim=4, embedding_name='cate_id'),
                              maxlen=4, length_name="seq_length")]
 

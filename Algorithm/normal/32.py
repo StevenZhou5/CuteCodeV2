@@ -56,20 +56,24 @@ class Solution():
         res = 0
         cur_len = 0
         for i in range(len(str)):
+            # 遇到 "(" 直接把当前左括号的索引放入栈中
             if str[i] == "(":
                 stack.append(i)
                 continue
+            # 遇到 ")" 时
+            # 如果栈顶为"("取出一个"("当前有效长度+2，
             if stack[-1] != -1:
                 cur_len += 2
                 res = max(res, cur_len)
                 stack.pop()
-            else:
+            else:  # 如果栈顶没有"(",说明截止到此时，字符串已经不是合法括号了，重置长度
                 cur_len = 0
         return res
 
     def get_longest_with_dp(self, str):
         if not str:
             return 0
+        # 状态定义：dp[i] 以str[i]为结尾的最长有效括号的长度，如果str[i]为"("始终为0，如果为")"有两种情况：和前一个匹配，和前i-dp[i-1]的前一个匹配或者不匹配
         dp = [0] * len(str)
         dp[0] = 0
 

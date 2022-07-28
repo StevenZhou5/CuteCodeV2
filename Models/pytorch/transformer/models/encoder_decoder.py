@@ -4,11 +4,11 @@ Encoder model
 """
 __author__ = 'Steven Zhou'
 
+import numpy as np
 import torch
 from torch import nn
-import numpy as np
 
-from modes.pytorch.transformer import dataset
+import dataset
 
 
 # =========================================================<editor-fold des="公共方法相关">=========================================================
@@ -124,7 +124,7 @@ class SelfAttentionLayer(nn.Module):
         super(SelfAttentionLayer, self).__init__()
 
         # 在计算完q,k矩阵的点积之后要除以一个temperature，然后在进行softmax，不然一开始Attention值较小的在softmax之后权重会趋于0，这不利于模型的学习
-        # 这个值跟知识蒸馏中的temperature含义一样(T必须大于1，T越小只能提取出权重占比越大的特征，二占比小的特征将"蒸"不出来，T过大又会把无关痛痒的特征也"蒸"出来，干扰模型的预测)
+        # 这个值跟知识蒸馏中的temperature含义一样(T必须大于1，T越小只能提取出权重占比越大的特征，而占比小的特征将"蒸"不出来，T过大又会把无关痛痒的特征也"蒸"出来，干扰模型的预测)
         # tensor([0.8000, 0.1000, 0.0800, 0.0200]) :
         # 温度为1时: tensor([0.4095, 0.2034, 0.1993, 0.1877])
         # 温度为2时: tensor([0.3247, 0.2288, 0.2266, 0.2199])
@@ -152,7 +152,7 @@ class SelfAttentionLayer(nn.Module):
         attention = attention / self.temperature  # [num_head * batch_size,batch_seq_q_len,batch_seq_k_v_len]
 
         if mask is not None:
-            # mask 如果是一个size和attention完全一样的上三角矩阵：主对角线一下全为零，其余位置全为1；这样的目的是为了让句子中每个词只注意一下它前面的词
+            # mask 如果是一个size和attention完全一样的上三角矩阵：主对角线以下全为零，其余位置全为1；这样的目的是为了让句子中每个词只注意一下它前面的词
             # masked_fill会把mask中为1的位置对应于attention矩阵中值都置为 - np.inf
             # 为什么是 负无穷而不是0是因为后面在进行softmax的时候要执行exe操作(e^x次幂):当x=负无穷时，
             attention = attention.masked_fill(mask, -np.inf)  # -np.inf代表负无穷

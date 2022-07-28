@@ -1,5 +1,5 @@
 # 切题四件套：
-# 1：clarification：读题、理解；训练题目细节、边界条件、可能的极端(错误)情况；
+# 1：clarification：读题、理解；询问题目细节、边界条件、可能的极端(错误)情况；
 # 2：Possible Solution：所有可能的解法一一沟通；Compare Time & Space Complexity(时间复杂度和空间复杂度)；Optimal Solution（最优解）
 # 3:coding：写代码；
 # 4:Test cases：测试用例;
@@ -25,7 +25,7 @@ def recursion(level, param1, param2, **kargs):
 
 # Dynamic Programming：自底向上
 def dynamic_programming(m, n):
-    # 1、状态的定义：初始状态:根据最右子结构可以减少状态的存储
+    # 1、状态的定义：初始状态:根据最优子结构可以减少状态的存储
     dp = [[0] * n] * m
     dp[0][0] = 0
     dp[0][1] = 1
@@ -45,7 +45,7 @@ def search(nums, target):
 
     while left <= right:  # 2、一定是小于等于
         # 3、中间索引计算
-        mid = left + (right - left >> 1)  # 整数情况下,注意位运算的优先级第，一定要用括号括起来
+        mid = left + (right - left >> 1)  # 整数情况下,注意位运算的优先级低，一定要用括号括起来
         # mid = left + (right - left) / 2 # 浮点数情况：比如开根号
 
         # 4、判断
@@ -84,7 +84,7 @@ def dfs_stack(root_node):
     while stack:
         # 2、出栈
         cur_node = stack.pop()
-        visited.add(visited)
+        visited.add(cur_node)
         print(cur_node.val)
         # 3、儿子们入栈
         for child_node in cur_node.childs:
@@ -135,4 +135,9 @@ def bfs_batch(root_node):
 # 位运算:
 # 1、判断奇数偶数： 奇数 if x & 1 ele 偶数
 # 2、删除掉二进制为的最后一个1： x & (x-1)
-# 3、只保留二进制位的最后一个1:  x & -x  ; 负数的二进制 = 正数的二进制的补码 + 1
+# 3、只保留二进制位的最后一个1:  x & -x  ; 负数的二进制 = 正数的二进制的补码 =  正数的二进制的反码(0变1，1变0) + 1；
+# a 的补码是 -a 不论a为正负都成立 (除了a为最大负数时，如果a为最大负数时a=2^(n-1) 那么 a 的补码 = a 本身)
+# 4、把第k+1位变为1； a | (1<<k);  001 | (1 << 2) = 101 = 5;
+# 5、把第k+1位取反(第k+1位1变0，0变1)； a ^ (1<<k); 5 = 101 ^ (1<<2) = 001 = 1; 5 = 101 ^ (1<<1) = 111 = 7;
+# 6、判断第k+1为是否为1; (a >> k) & 1 == 1
+# 7、取出后k为的值： a - ((a>>k) << k); 35 =0010 0011 - ((0010 0011 >> 4) << 4) = 0011 = 3; # 取出了后4位的值

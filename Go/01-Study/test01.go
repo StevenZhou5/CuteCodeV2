@@ -3,10 +3,11 @@ package main
 import (
 	"fmt"
 	"interfacetest"
+	"json_opt_test"
 	"methodtest"
 	"string_opt_test"
 )
-
+var TestCount = 1
 func main() {
 	fmt.Printf("hello")
 
@@ -24,7 +25,7 @@ func main() {
 
 	// Json
 	//json_opt_test.Test01()
-	//json_opt_test.Test02()
+	json_opt_test.Test02()
 	//json_opt_test.Test03()
 
 	fmt.Sprintf("%[3]*.[2]*[1]f", 12.0, 2, 6)

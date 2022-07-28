@@ -5,8 +5,8 @@ Transformer model
 __author__ = 'Steven Zhou'
 from torch import nn
 
-from modes.pytorch.transformer.models.encoder_decoder import DecoderModel
-from modes.pytorch.transformer.models.encoder_decoder import EncoderModel
+from encoder_decoder import DecoderModel
+from encoder_decoder import EncoderModel
 
 
 class TranslatorModel(nn.Module):

@@ -36,10 +36,10 @@ class Solution():
             for _ in range(batch_cnt):
                 root_idx = queue.popleft()
                 cur_res.append(nums[root_idx])
-                left_idx = (root_idx << 1) + 1
+                left_idx = (root_idx << 1) + 1  # 左边孩子
                 if left_idx < all_cnt and nums[left_idx]:
                     queue.append(left_idx)
-                right_idx = (root_idx << 1) + 2
+                right_idx = (root_idx << 1) + 2  # 右边孩子
                 if right_idx < all_cnt and nums[right_idx]:
                     queue.append(right_idx)
                 # print("left_idx:", left_idx, "right_idx:", right_idx, "; all_cnt:", all_cnt)

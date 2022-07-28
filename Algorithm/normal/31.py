@@ -45,7 +45,7 @@ class Solution(object):
                 idx = i - 1
                 break
         print(idx)
-        if idx == -1:
+        if idx == -1:  # 完全逆序从大到小，直接返回
             nums.reverse()
             return nums
 
@@ -54,14 +54,14 @@ class Solution(object):
             if nums[i] > nums[idx]:
                 nums[idx], nums[i] = nums[i], nums[idx]
                 break
-        print(nums)
+        # print(nums)
 
         # idx 后面的数据翻转
         nums[idx + 1:] = nums[cnt:idx:-1]
         return nums
 
 
-nums = [0, 1, 2, 3, 4, 7, 5, 6, 8, 9]
+nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 solu = Solution()
 for i in range(10):
     print("res:", solu.get_next(nums))

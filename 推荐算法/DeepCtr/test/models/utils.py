@@ -1,18 +1,12 @@
 from __future__ import absolute_import, division, print_function
 
-import inspect
 import os
-import sys
 
 import numpy as np
 import tensorflow as tf
-from numpy.testing import assert_allclose
-from tensorflow.python.keras import backend as K
-from tensorflow.python.keras.layers import Input, Masking
-from tensorflow.python.keras.models import Model, load_model, save_model
-
 from deepctr.feature_column import SparseFeat, VarLenSparseFeat, DenseFeat, DEFAULT_GROUP_NAME
 from deepctr.layers import custom_objects
+from tensorflow.python.keras.models import load_model, save_model
 
 SAMPLE_SIZE = 8
 VOCABULARY_SIZE = 4
@@ -22,6 +16,7 @@ Estimator_TEST_TF1 = True
 def gen_sequence(dim, max_len, sample_size):
     return np.array([np.random.randint(0, dim, max_len) for _ in range(sample_size)]), np.random.randint(1, max_len + 1,
                                                                                                          sample_size)
+
 
 def get_test_data(sample_size=1000, embedding_size=4, sparse_feature_num=1, dense_feature_num=1,
                   sequence_feature=['sum', 'mean', 'max', 'weight'], classification=True, include_length=False,
@@ -99,7 +94,7 @@ def check_model(model, model_name, x, y, check_model_io=True):
     print(model_name + " 测试和训练通过")
     model.save_weights(model_name + '_weights.h5')
     model.load_weights(model_name + '_weights.h5')
-    os.remove(model_name, +'_weights.h5')
+    os.remove(model_name + '_weights.h5')
     print(model_name + "存储和加载权重测试通过")
 
     if check_model_io:

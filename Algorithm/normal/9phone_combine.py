@@ -15,13 +15,14 @@ class Solution(object):
         }
         self.res = []
 
-        def get_combine(target, sub_str):
-            if not sub_str:
-                self.res.append(target)
+        def get_combine(cur_target, left_str):
+            # 递归终止条件
+            if not left_str:
+                self.res.append(cur_target)
                 return
 
-            for char in self.num_char_map[sub_str[0]]:
-                get_combine(target + char, sub_str[1:])
+            for char in self.num_char_map[left_str[0]]:
+                get_combine(cur_target + char, left_str[1:])
 
         get_combine("", str)
         return self.res

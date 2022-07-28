@@ -26,7 +26,7 @@ class Solution():
     def merge(self, intervals):
         if not intervals:
             return []
-        intervals = sorted(intervals, key=lambda item: item[0])  # 注意，这里一定要用下届排序
+        intervals = sorted(intervals, key=lambda item: item[0])  # 注意，这里一定要用下届即为item[0]排序
         print("sorted intervals:", intervals)
         res = [intervals[0]]
         for i in range(1, len(intervals)):

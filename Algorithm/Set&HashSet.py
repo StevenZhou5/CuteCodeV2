@@ -1,6 +1,3 @@
-from random import randint
-
-
 class SetUtils(object):
     def __init__(self):
 
@@ -99,8 +96,9 @@ class SetUtils(object):
 
 
 su = SetUtils()
-nums, target = [randint(-9, 9) for _ in range(10)], randint(-18, 18)
+# nums, target = [randint(-9, 9) for _ in range(10)], randint(-18, 18)
 # nums, target = [9, 6, 8, 6, 2, 1, -2, 3, -9, 9], 7
+nums, target = [9, 6, 8, 6, 2, 1, -2, 3, -9, 9, -10, 5, 5], 0
 print(nums, target)
 print(su.two_sums(nums, target))
 print(su.two_sums_idx(nums, target))

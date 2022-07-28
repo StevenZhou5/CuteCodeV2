@@ -76,6 +76,6 @@ class Solution():
 
 
 s = "asdsdeeees"
-t = "eeesdwa"
+t = "eeesd"
 solu = Solution()
 print("res:", solu.get_t_from_s_with_slidding_window(s, t))

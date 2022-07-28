@@ -36,6 +36,7 @@
 class Solution:
 
     def search1(self, nums, target: int) -> int:
+        # 最普通的二分查找，
         if not nums:
             return -1
 
@@ -52,6 +53,7 @@ class Solution:
         return -1
 
     def search_first(self, nums, target: int) -> int:
+        # 有重复数字的情况下，找到第一个等于taget的目标
         if not nums:
             return -1
 
@@ -68,6 +70,7 @@ class Solution:
         return -1
 
     def search_last(self, nums, target):
+        # 有重复数字，找到最后一个等于target的值
         if not nums:
             return
         left, right = 0, len(nums) - 1
@@ -83,6 +86,7 @@ class Solution:
         return -1
 
     def search_latest_small(self, nums, target):
+        # 找到小于target中的最大值
         if not nums:
             return -1
 
@@ -90,9 +94,9 @@ class Solution:
         while left <= right:
             mid = left + (right - left >> 1)
             if nums[mid] >= target:
-                if nums[mid] >= target and (mid == 0 or nums[mid - 1] < target):
+                if mid == 0 or nums[mid - 1] < target:  # 这里不需要nums[mid] == target，nums[mid] > target 任然可以
                     return -1 if mid == 0 else (mid - 1)
-                right = mid - 1
+                right = mid - 1  # 其实直接返回right即可
             else:
                 left = mid + 1
 
@@ -105,9 +109,9 @@ class Solution:
         while left <= right:
             mid = left + (right - left >> 1)
             if nums[mid] <= target:
-                if nums[mid] <= target and (mid == len(nums) - 1 or nums[mid + 1] > target):
+                if mid == len(nums) - 1 or nums[mid + 1] > target:
                     return -1 if (mid == len(nums) - 1) else (mid + 1)
-                left = mid + 1
+                left = mid + 1  # 直接返回left也可以，但需要判断left越界的话置为-1
             else:
                 right = mid - 1
 
