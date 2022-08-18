@@ -42,12 +42,12 @@ class Solution:
         # return res
 
         # 迭代法 : 时间复杂度O(n); 空间复杂度O(1)
-        res = ListNode(0)
-        res.next = head
-        pre = res
+        res_pre = ListNode(0)
+        res_pre.next = head
+        pre = res_pre
         while pre.next and pre.next.next:
             a, b, c = pre.next, pre.next.next, pre.next.next.next
             pre.next, b.next, a.next = b, a, c
             pre = a
 
-        return res.next
+        return res_pre.next

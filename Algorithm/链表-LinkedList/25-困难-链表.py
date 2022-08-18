@@ -39,9 +39,9 @@ class ListNode:
 class Solution:
     def reverseKGroup(self, head: ListNode, k: int) -> ListNode:
         # 递归法
-        # res = ListNode(0)
-        # res.next = head
-        # k_end_node = res
+        # res_pre = ListNode(0)
+        # res_pre.next = head
+        # k_end_node = res_pre
         # for i in range(k):
         #     k_end_node = k_end_node.next
         #     if not k_end_node:
@@ -58,17 +58,17 @@ class Solution:
         # return k_end_node
 
         # 迭代法
-        res = ListNode(0)
-        res.next = head
+        res_pre = ListNode(0)
+        res_pre.next = head
 
-        pre_end = res
+        pre_end = res_pre
 
         while pre_end.next:
             cur_start = pre_end.next
             cur_end = cur_start
             for i in range(k - 1):
                 if not cur_end.next:
-                    return res.next
+                    return res_pre.next
                     break
                 cur_end = cur_end.next
 
@@ -83,4 +83,4 @@ class Solution:
             cur_start.next = cur  # 当前的尾结点链接到下一个的头结点上
             pre_end = cur_start  # 更新上一个尾结点为当前的的尾结点
 
-        return res.next
+        return res_pre.next
