@@ -33,7 +33,7 @@
 # 0 <= prices[i] <= 104
 
 class Solution:
-    def maxProfit(self, prices: List[int]) -> int:
+    def maxProfit(self, prices: [int]) -> int:
         # 动态规划：时间复杂度O(n); 空间复杂度O(1);
         # have_val = float('-inf')
         # empty_val = 0

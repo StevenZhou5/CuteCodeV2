@@ -21,18 +21,18 @@
 # 2.  1 阶 + 2 阶
 # 3.  2 阶 + 1 阶
 
-class Solution():
-
-    def get_all_solution_cnt(self, n):
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        # 动态规划
         dp_pre = 1
         dp_pre_pre = 1
-
-        for i in range(1, n):
-            dp_pre, dp_pre_pre = dp_pre_pre + dp_pre, dp_pre
+        for i in range(2, n + 1):
+            dp_cur = dp_pre + dp_pre_pre
+            dp_pre, dp_pre_pre = dp_cur, dp_pre
 
         return dp_pre
 
 
 solu = Solution()
 n = 7
-print("res:", solu.get_all_solution_cnt(n))
+print("res:", solu.climbStairs(n))
